@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+SecureSight Dashboard
+A beginner-friendly, full-stack technical assessment project for SecureSight: a CCTV monitoring dashboard with AI-powered incident detection.
+The dashboard connects up to 3 surveillance feeds, lists incidents, and allows incident resolution.
 
-## Project info
+1. Deployment Instructions
+Live Deployment
+The app is live on Vercel:
+https://secure-sight-eight.vercel.app/
 
-**URL**: https://lovable.dev/projects/662e6912-7e0e-43ce-b57d-0131c923b837
+Local Development
+Clone Repository
+bash
+Copy
+Edit
+git clone <repo-url>
+cd securesight-dashboard
+Install Dependencies
+bash
+Copy
+Edit
+npm install
+Configure Environment Variables
+Copy .env.example to .env
 
-## How can I edit this code?
+Set DATABASE_URL (SQLite default or Postgres/MySQL for production)
 
-There are several ways of editing your application.
+Database Setup with Prisma
+bash
+Copy
+Edit
+npx prisma db push
+npx tsx prisma/seed.ts
+Place 12+ thumbnail images (img1.jpg to img12.jpg) in /public/thumbnails/ for seeded data.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/662e6912-7e0e-43ce-b57d-0131c923b837) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Run Locally
+bash
+Copy
+Edit
 npm run dev
-```
+Visit http://localhost:3000
 
-**Edit a file directly in GitHub**
+Production Deployment (Vercel)
+Push repo to GitHub.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Import into Vercel.
 
-**Use GitHub Codespaces**
+Add environment variables (DATABASE_URL) in Vercel dashboard.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Use Neon/Supabase for managed Postgres (or stick with SQLite for demo).
 
-## What technologies are used for this project?
+2. Tech Decisions
+Framework: Next.js 15 (App Router)
+→ Unified frontend + API routes, supports SSR/SSG, easy deployment on Vercel.
 
-This project is built with:
+Database Layer: Prisma ORM
+→ Type-safe queries, quick schema migrations, built-in seed scripts.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Database Choice: SQLite (simple local setup)
+→ Can scale to PostgreSQL/MySQL for production if needed.
 
-## How can I deploy this project?
+Styling: Tailwind CSS
+→ Utility-first approach, matches Figma mockup quickly.
 
-Simply open [Lovable](https://lovable.dev/projects/662e6912-7e0e-43ce-b57d-0131c923b837) and click on Share -> Publish.
+Frontend Architecture: Component-driven
+→ Navbar, Incident Player (video), Incident List (resolvable incidents).
 
-## Can I connect a custom domain to my Lovable project?
+3. If I Had More Time…
+Authentication & Roles: Admin vs viewer, secure incident management.
 
-Yes, you can!
+Real Video Streams: Replace static MP4/images with live CCTV feeds.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Filters & Pagination: Filter incidents by type/location and paginate long lists.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Responsive Design: Full mobile and tablet optimization.
+
+Realtime Updates: WebSocket-based live incident push updates.
+
+Analytics Dashboard: Charts for incident frequency by type and location.
+
+Notifications: Email/SMS/Slack alerts for critical threats.
+
+3D/Map View: Spatial visualization of camera locations and incidents.
